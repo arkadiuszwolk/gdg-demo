@@ -75,7 +75,7 @@ export default function Page() {
     <>
       <CorgiShadow
         className="pointer-events-none fixed -bottom-20 left-1/2 -z-10 h-[95dvh] w-auto
-                   -translate-x-1/2 -ml-[32vw]
+                   -translate-x-1/2 ml-[-32vw]
                    text-neutral-500 dark:text-slate-800"
       />
       <main className="min-h-screen overflow-hidden px-4 py-5 text-foreground sm:px-8 sm:py-8 mt-20">

@@ -28,15 +28,6 @@ const listVariants = {
   },
 };
 
-const itemVariants: Variant = {
-  hidden: { opacity: 0, y: 12 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
 export function MemberList({ members, className }: MemberListProps) {
   if (!members.length) return null;
 
@@ -52,7 +43,14 @@ export function MemberList({ members, className }: MemberListProps) {
         <Link href="/wall">
           <motion.li
             key={member.id}
-            variants={itemVariants}
+            variants={{
+              hidden: { opacity: 0, y: 12 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] },
+              },
+            }}
             className="flex w-full items-center gap-3 rounded-2xl bg-muted/60 p-3 hover:bg-muted/85 hover:cursor-pointer backdrop-blur-md"
           >
             <div className="w-44 flex items-center gap-3">
