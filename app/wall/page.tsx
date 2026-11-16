@@ -13,7 +13,7 @@ import {
 import { CircularBadge } from "@/components/circural-badge";
 import CorgiShadow from "@/components/corgi-shadow";
 import SideText from "@/components/side-text";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 const boxClass =
   "profile-box rounded-2xl bg-muted/60 p-3 backdrop-blur-md transition-colors hover:cursor-pointer hover:bg-muted/85";
@@ -38,7 +38,7 @@ const tileVariants = {
   },
 };
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } },
 };
@@ -55,7 +55,14 @@ function Tile({
 }) {
   return (
     <motion.article
-      variants={tileVariants}
+      variants={{
+        hidden: { opacity: 0, y: 24 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+        },
+      }}
       className={`${tileClass} ${className}`}
     >
       {children}
