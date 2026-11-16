@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
+import { Logo } from "@/components/logo";
+import { SearchInput } from "@/components/search-input";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const robotoSans = Roboto({
+  variable: "--font-roboto-sans",
   subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700", "900"],
 });
 
 const geistMono = Geist_Mono({
@@ -21,9 +24,24 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${robotoSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className={`min-h-full flex flex-col ${robotoSans.className}`}>
+        <div className="w-full px-4 md:px-18 py-4 flex items-center justify-between bg-background/10 sticky top-0 backdrop-blur-md z-50">
+          <div className="w-80">
+            <Logo />
+          </div>
+          <SearchInput />
+          <div className="flex items-center justify-end gap-4 w-80">
+            <div className="flex-col items-end hidden lg:flex">
+              <span className="font-medium">Arkadiusz Wołk</span>
+              <span className="text-sm">arekwolk3@gmail.com</span>
+            </div>
+            <div className="w-12 aspect-square rounded-full bg-neutral-800" />
+          </div>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }

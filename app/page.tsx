@@ -1,69 +1,89 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+import { MemberList } from "@/components/member-list";
+import { SlidingTabs } from "@/components/sliding-tabs";
+import CorgiShadow from "@/components/corgi-shadow";
+import SideText from "@/components/side-text";
+
+const tabs = [
+  { value: "man", label: "Management (55)" },
+  { value: "dev", label: "Development (38)" },
+  { value: "mar", label: "Marketing (62)" },
+];
+
+const man_members = [
+  { id: "1", name: "Anna Kowalska", status: "Przewodniczący", avatar: "AK" },
+  { id: "2", name: "Piotr Nowak", status: "Członek", avatar: "PN" },
+  { id: "3", name: "Maria Wiśniewska", status: "Kandydat", avatar: "MW" },
+];
+
+const dev_members = [
+  { id: "1", name: "Adam Berek", status: "Przewodniczący", avatar: "AK" },
+  { id: "2", name: "Michalina Nowacka", status: "Członek", avatar: "PN" },
+  { id: "3", name: "Maciej Nawrocki", status: "Kandydat", avatar: "MW" },
+  { id: "4", name: "Zuzanna Kwiecińska", status: "Kandydat", avatar: "MW" },
+  { id: "5", name: "Adam Berek", status: "Przewodniczący", avatar: "AK" },
+  { id: "6", name: "Michalina Nowacka", status: "Członek", avatar: "PN" },
+  { id: "7", name: "Maciej Nawrocki", status: "Kandydat", avatar: "MW" },
+  { id: "8", name: "Zuzanna Kwiecińska", status: "Kandydat", avatar: "MW" },
+  { id: "9", name: "Adam Berek", status: "Przewodniczący", avatar: "AK" },
+  { id: "10", name: "Adam Berek", status: "Przewodniczący", avatar: "AK" },
+  { id: "12", name: "Michalina Nowacka", status: "Członek", avatar: "PN" },
+  { id: "13", name: "Maciej Nawrocki", status: "Kandydat", avatar: "MW" },
+  { id: "14", name: "Zuzanna Kwiecińska", status: "Kandydat", avatar: "MW" },
+  { id: "15", name: "Adam Berek", status: "Przewodniczący", avatar: "AK" },
+  { id: "16", name: "Michalina Nowacka", status: "Członek", avatar: "PN" },
+  { id: "17", name: "Maciej Nawrocki", status: "Kandydat", avatar: "MW" },
+  { id: "18", name: "Zuzanna Kwiecińska", status: "Kandydat", avatar: "MW" },
+];
+
+const mar_members = [
+  {
+    id: "1",
+    name: "Michał Lewandowski",
+    status: "Przewodniczący",
+    avatar: "AK",
+  },
+  { id: "2", name: "Artur Zieliński", status: "Członek", avatar: "PN" },
+  { id: "3", name: "Paweł Kordek", status: "Kandydat", avatar: "MW" },
+  { id: "3", name: "Urszula Nowak", status: "Kandydat", avatar: "MW" },
+  { id: "3", name: "Janusz Kowalski", status: "Kandydat", avatar: "MW" },
+];
+
+export default function Page() {
+  const [selectedTab, setSelectedTab] = useState("man");
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <CorgiShadow
+        className="pointer-events-none fixed -bottom-20 left-1/2 -z-10 h-[95dvh] w-auto
+                   -translate-x-1/2 -ml-[32vw]
+                   text-neutral-500 dark:text-slate-800"
+      />
+      {/* <div
+        aria-hidden="true"
+        className="pointer-events-none select-none fixed bottom-4 right-0 -z-10
+             max-h-dvh overflow-hidden
+             [writing-mode:vertical-rl] rotate-180
+             whitespace-nowrap font-extrabold uppercase leading-none
+             text-[7vw] text-neutral-200 dark:text-slate-800 tracking-tighter"
+      >
+        Leader board
+      </div> */}
+
+      <main className="flex min-h-screen items-start justify-center p-4 md:p-18">
+        <div
+          aria-hidden="true"
+          className="absolute left-16 bottom-8 flex items-center justify-center pointer-events-none z-0"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="flex w-full max-w-xl flex-col items-center gap-8 z-10">
+          <SlidingTabs items={tabs} onValueChange={setSelectedTab} />
+          {selectedTab === "man" && <MemberList members={man_members} />}
+          {selectedTab === "dev" && <MemberList members={dev_members} />}
+          {selectedTab === "mar" && <MemberList members={mar_members} />}
         </div>
       </main>
-    </div>
+    </>
   );
 }
